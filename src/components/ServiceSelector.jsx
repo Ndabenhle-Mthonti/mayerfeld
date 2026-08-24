@@ -89,7 +89,16 @@ export function ServiceSelector({
                 aria-valuemax={DURATION_MAX}
                 aria-valuenow={duration}
                 aria-valuetext={durationLabel}
-                onChange={(event) => onDurationChange(Number(event.target.value))}
+                onChange={(event) => {
+                  const nextDuration = Number(event.target.value)
+                  if (
+                    Number.isInteger(nextDuration) &&
+                    nextDuration >= DURATION_MIN &&
+                    nextDuration <= DURATION_MAX
+                  ) {
+                    onDurationChange(nextDuration)
+                  }
+                }}
               />
               <div className="duration-control__bounds">
                 <span>{DURATION_MIN} month</span>

@@ -16,6 +16,8 @@ import { SERVICES } from '../data/services.js'
  * - totalHours = baseMonthlyHours * duration
  * - teamSize = Math.ceil(totalHours / 80)
  * - kpiCount = Math.max(2, Math.ceil(duration * 1.5))
+ *
+ * Invalid or missing inputs return null. Never throws.
  */
 
 const HOURS_PER_CONSULTANT = 80
@@ -43,21 +45,32 @@ function isValidDuration(duration) {
   )
 }
 
-export function calculateEngagement({ businessSize, pillar, duration } = {}) {
+function isUsableResult({ totalHours, teamSize, kpiCount }) {
+  return [totalHours, teamSize, kpiCount].every(
+    (value) => Number.isFinite(value) && value > 0,
+  )
+}
+
+export function calculateEngagement(input) {
+  if (input == null || typeof input !== 'object') {
+    return null
+  }
+
+  const { businessSize, pillar, duration } = input
   const service = findService(pillar)
-  const monthlyHours = service?.baseHoursByBusinessSize?.[businessSize]
+  const sizeKey = typeof businessSize === 'string' ? businessSize : ''
+  const monthlyHours = service?.baseHoursByBusinessSize?.[sizeKey]
 
   if (!Number.isFinite(monthlyHours) || monthlyHours <= 0 || !isValidDuration(duration)) {
     return null
   }
 
   const totalHours = monthlyHours * duration
-  const teamSize = Math.ceil(totalHours / HOURS_PER_CONSULTANT)
-  const kpiCount = Math.max(MIN_KPI_COUNT, Math.ceil(duration * KPI_FACTOR))
-
-  return {
+  const result = {
     totalHours,
-    teamSize,
-    kpiCount,
+    teamSize: Math.ceil(totalHours / HOURS_PER_CONSULTANT),
+    kpiCount: Math.max(MIN_KPI_COUNT, Math.ceil(duration * KPI_FACTOR)),
   }
+
+  return isUsableResult(result) ? result : null
 }

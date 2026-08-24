@@ -65,7 +65,7 @@ export function Navbar({ onOpenConsult }) {
             ))}
             <li>
               <button
-                className="button button--primary"
+                className="button button--primary navbar__consult"
                 type="button"
                 onClick={handleConsultClick}
               >

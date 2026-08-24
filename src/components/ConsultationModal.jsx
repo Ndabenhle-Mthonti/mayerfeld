@@ -29,6 +29,7 @@ export function ConsultationModal({ isOpen, onClose, returnFocusRef }) {
 
     function handleKeyDown(event) {
       if (event.key === 'Escape') {
+        event.preventDefault()
         onClose()
         return
       }
@@ -59,7 +60,9 @@ export function ConsultationModal({ isOpen, onClose, returnFocusRef }) {
     return () => {
       document.body.style.overflow = previousOverflow
       document.removeEventListener('keydown', handleKeyDown)
-      trigger?.focus()
+      if (trigger && typeof trigger.focus === 'function' && document.contains(trigger)) {
+        trigger.focus()
+      }
     }
   }, [isOpen, onClose, returnFocusRef])
 
