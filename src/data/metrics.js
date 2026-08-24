@@ -1,22 +1,18 @@
+// Sample assessment figures only. Not audited Mayerfeld results.
 export const METRICS = [
   {
-    id: 'pillars',
-    value: '3',
-    label: 'Consulting pillars',
+    id: 'projects-completed',
+    value: '20+',
+    label: 'Projects Completed',
   },
   {
-    id: 'regions',
-    value: '4',
-    label: 'Regions served',
+    id: 'client-satisfaction',
+    value: '95%',
+    label: 'Client Satisfaction',
   },
   {
-    id: 'duration',
-    value: '1–6',
-    label: 'Month engagements',
-  },
-  {
-    id: 'focus',
-    value: 'SADC',
-    label: 'Market coverage',
+    id: 'growth-partnerships',
+    value: '10+',
+    label: 'Growth Partnerships',
   },
 ]

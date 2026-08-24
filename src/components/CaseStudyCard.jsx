@@ -1,12 +1,32 @@
-export function CaseStudyCard({ study }) {
+export function CaseStudyCard({
+  heading,
+  category,
+  challenge,
+  solution,
+  outcome,
+  metric,
+}) {
   return (
-    <article className="case-card">
-      <p className="case-card__meta">
-        {study.pillar} · {study.region}
+    <article className="card case-card">
+      <p className="case-card__category">{category}</p>
+      <h3>{heading}</h3>
+
+      <p>
+        <span className="case-card__label">Challenge</span>
+        {challenge}
       </p>
-      <h3>{study.title}</h3>
-      <p className="case-card__client">{study.anonymisedLabel}</p>
-      <p>{study.outcome}</p>
+      <p>
+        <span className="case-card__label">Solution</span>
+        {solution}
+      </p>
+      <p>
+        <span className="case-card__label">Outcome</span>
+        {outcome}
+      </p>
+      <p className="case-card__metric">
+        <span className="case-card__label">Metric</span>
+        {metric}
+      </p>
     </article>
   )
 }

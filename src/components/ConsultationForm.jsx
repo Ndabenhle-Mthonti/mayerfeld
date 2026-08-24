@@ -1,19 +1,35 @@
 import { REGIONS } from '../data/regions.js'
 
-export function ConsultationForm({ onCancel }) {
+export function ConsultationForm({ onCancel, firstFieldRef }) {
   function handleSubmit(event) {
     event.preventDefault()
   }
 
   return (
     <form className="consult-form" onSubmit={handleSubmit} noValidate>
-      <div className="consult-form__field">
-        <label htmlFor="fullName">Full name</label>
-        <input id="fullName" name="fullName" type="text" autoComplete="name" />
+      <div className="form-field">
+        <label htmlFor="fullName">Full Name</label>
+        <input
+          ref={firstFieldRef}
+          id="fullName"
+          name="fullName"
+          type="text"
+          autoComplete="name"
+        />
       </div>
 
-      <div className="consult-form__field">
-        <label htmlFor="companyName">Company</label>
+      <div className="form-field">
+        <label htmlFor="businessEmail">Business Email</label>
+        <input
+          id="businessEmail"
+          name="businessEmail"
+          type="email"
+          autoComplete="email"
+        />
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="companyName">Company Name</label>
         <input
           id="companyName"
           name="companyName"
@@ -22,17 +38,7 @@ export function ConsultationForm({ onCancel }) {
         />
       </div>
 
-      <div className="consult-form__field">
-        <label htmlFor="email">Email</label>
-        <input id="email" name="email" type="email" autoComplete="email" />
-      </div>
-
-      <div className="consult-form__field">
-        <label htmlFor="phone">Phone</label>
-        <input id="phone" name="phone" type="tel" autoComplete="tel" />
-      </div>
-
-      <div className="consult-form__field">
+      <div className="form-field">
         <label htmlFor="region">Region</label>
         <select id="region" name="region" defaultValue="">
           <option value="" disabled>
@@ -46,9 +52,9 @@ export function ConsultationForm({ onCancel }) {
         </select>
       </div>
 
-      <div className="consult-form__field">
-        <label htmlFor="message">How can we help?</label>
-        <textarea id="message" name="message" rows="4" />
+      <div className="form-field">
+        <label htmlFor="scopeSummary">Scope Summary</label>
+        <textarea id="scopeSummary" name="scopeSummary" rows="4" />
       </div>
 
       <div className="consult-form__actions">
